@@ -1,0 +1,81 @@
+GraphicsWindow.Title = "az yakan çok kaçan top"
+GraphicsWindow.BackgroundColor = "Yellow"
+GraphicsWindow.Width=1000
+GraphicsWindow.Height=700
+GraphicsWindow.MouseMove=move
+
+bar = Shapes.AddRectangle(200,20)
+top = Shapes.AddEllipse(20,20)
+barx= GraphicsWindow.MouseX
+bary= GraphicsWindow.Height
+Shapes.Move(bar,0,bary-20)
+
+Sub move
+barx= GraphicsWindow.MouseX
+bary= GraphicsWindow.Height
+Shapes.Move(bar,barx-100,bary-20)
+EndSub
+
+topx = Math.GetRandomNumber(700)+100
+topy = 0
+
+
+
+yon = 2
+i = 1
+While i<2
+  barxx = barx - 100
+  If topy > 650 Then
+    If (topx > (barxx+200)) OR  (topx < barxx) then
+      GraphicsWindow.ShowMessage("yandınız!", "game ovva")
+      Program.Delay(500)
+      Program.End()
+    EndIf
+  EndIf
+  
+  If yon = 1 Then
+    topx = topx + 5
+    topy = topy - 5
+    Shapes.Move(top,topx,topy)
+    If topy < 10 then
+    yon = 2
+  EndIf
+  If topx > 970 then
+    yon = 4
+    EndIf
+  EndIf
+  If yon = 2 Then
+    topx = topx + 5
+    topy = topy + 5
+    Shapes.Move(top,topx,topy)
+    If topx > 970 then
+    yon = 3
+  EndIf
+  If topy > 670 then
+    yon = 1
+    EndIf
+  EndIf
+  If yon = 3 Then
+    topx = topx - 5
+    topy = topy + 5
+    Shapes.Move(top,topx,topy)
+    If topy > 670 then
+    yon = 4
+  EndIf
+  If topx < 10 then
+    yon = 2
+    EndIf
+  EndIf
+  If yon = 4 Then
+    topx = topx - 5
+    topy = topy - 5
+    Shapes.Move(top,topx,topy)
+    If topx < 10 then
+    yon = 1
+  EndIf
+  If topy < 10 then
+    yon = 3
+    EndIf
+  EndIf
+  Program.Delay(10)
+EndWhile
